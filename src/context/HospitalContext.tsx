@@ -66,8 +66,8 @@ export interface Inventory {
   lastRestocked: string;
 }
 
-// API base URL - change this to your Tomcat server address
-const API_BASE_URL = "http://localhost:8080/hospital-api";
+// API base URL - Updated to point to your Tomcat server
+const API_BASE_URL = "http://localhost:8080/hospital-api/api";
 
 // Context type definition
 interface HospitalContextType {
@@ -117,7 +117,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
       try {
         // Fetch patients
         setLoading(prev => ({ ...prev, patients: true }));
-        const patientsResponse = await fetch(`${API_BASE_URL}/api/patients`);
+        const patientsResponse = await fetch(`${API_BASE_URL}/patients`);
         if (!patientsResponse.ok) throw new Error('Failed to fetch patients');
         const patientsData = await patientsResponse.json();
         setPatients(patientsData);
@@ -125,7 +125,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Fetch doctors
         setLoading(prev => ({ ...prev, doctors: true }));
-        const doctorsResponse = await fetch(`${API_BASE_URL}/api/doctors`);
+        const doctorsResponse = await fetch(`${API_BASE_URL}/doctors`);
         if (!doctorsResponse.ok) throw new Error('Failed to fetch doctors');
         const doctorsData = await doctorsResponse.json();
         setDoctors(doctorsData);
@@ -133,7 +133,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Fetch appointments
         setLoading(prev => ({ ...prev, appointments: true }));
-        const appointmentsResponse = await fetch(`${API_BASE_URL}/api/appointments`);
+        const appointmentsResponse = await fetch(`${API_BASE_URL}/appointments`);
         if (!appointmentsResponse.ok) throw new Error('Failed to fetch appointments');
         const appointmentsData = await appointmentsResponse.json();
         setAppointments(appointmentsData);
@@ -141,7 +141,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Fetch bills
         setLoading(prev => ({ ...prev, bills: true }));
-        const billsResponse = await fetch(`${API_BASE_URL}/api/bills`);
+        const billsResponse = await fetch(`${API_BASE_URL}/bills`);
         if (!billsResponse.ok) throw new Error('Failed to fetch bills');
         const billsData = await billsResponse.json();
         setBills(billsData);
@@ -149,7 +149,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Fetch inventory
         setLoading(prev => ({ ...prev, inventory: true }));
-        const inventoryResponse = await fetch(`${API_BASE_URL}/api/inventory`);
+        const inventoryResponse = await fetch(`${API_BASE_URL}/inventory`);
         if (!inventoryResponse.ok) throw new Error('Failed to fetch inventory');
         const inventoryData = await inventoryResponse.json();
         setInventory(inventoryData);
@@ -184,7 +184,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
   // Function to add a new patient
   const addPatient = async (patientData: Omit<Patient, 'id' | 'registeredDate'>) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/patients`, {
+      const response = await fetch(`${API_BASE_URL}/patients`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -208,7 +208,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
   // Function to update an existing patient
   const updatePatient = async (updatedPatient: Patient) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/patients/${updatedPatient.id}`, {
+      const response = await fetch(`${API_BASE_URL}/patients/${updatedPatient.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -233,7 +233,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
   // Function to add a new appointment
   const addAppointment = async (appointmentData: Omit<Appointment, 'id'>) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/appointments`, {
+      const response = await fetch(`${API_BASE_URL}/appointments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -257,7 +257,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
   // Function to update an existing appointment
   const updateAppointment = async (updatedAppointment: Appointment) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/appointments/${updatedAppointment.id}`, {
+      const response = await fetch(`${API_BASE_URL}/appointments/${updatedAppointment.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -282,7 +282,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
   // Function to cancel an appointment
   const cancelAppointment = async (id: string) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/appointments/${id}/cancel`, {
+      const response = await fetch(`${API_BASE_URL}/appointments/${id}/cancel`, {
         method: 'PUT',
       });
       
@@ -303,7 +303,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
   // Function to add a new bill
   const addBill = async (billData: Omit<Bill, 'id'>) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/bills`, {
+      const response = await fetch(`${API_BASE_URL}/bills`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -327,7 +327,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
   // Function to update bill status
   const updateBillStatus = async (id: string, status: Bill['status']) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/bills/${id}/status`, {
+      const response = await fetch(`${API_BASE_URL}/bills/${id}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -354,7 +354,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
     try {
       if (!query.trim()) return patients;
       
-      const response = await fetch(`${API_BASE_URL}/api/patients/search?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`${API_BASE_URL}/patients/search?q=${encodeURIComponent(query)}`);
       if (!response.ok) throw new Error('Failed to search patients');
       
       const searchResults = await response.json();
