@@ -135,7 +135,7 @@ export const mockAppointments = [
     doctorName: "Dr. Elizabeth Taylor",
     date: "2023-09-22",
     time: "10:30",
-    status: "scheduled",
+    status: "scheduled" as "scheduled" | "completed" | "cancelled",
     purpose: "Follow-up for hypertension medication"
   },
   {
@@ -146,7 +146,7 @@ export const mockAppointments = [
     doctorName: "Dr. James Rodriguez",
     date: "2023-09-23",
     time: "09:15",
-    status: "scheduled",
+    status: "scheduled" as "scheduled" | "completed" | "cancelled",
     purpose: "Annual check-up"
   },
   {
@@ -157,7 +157,7 @@ export const mockAppointments = [
     doctorName: "Dr. Susan Kim",
     date: "2023-09-20",
     time: "14:00",
-    status: "completed",
+    status: "completed" as "scheduled" | "completed" | "cancelled",
     purpose: "Headache and dizziness evaluation"
   },
   {
@@ -168,7 +168,7 @@ export const mockAppointments = [
     doctorName: "Dr. David Patel",
     date: "2023-09-21",
     time: "11:45",
-    status: "completed",
+    status: "completed" as "scheduled" | "completed" | "cancelled",
     purpose: "Knee pain consultation"
   },
   {
@@ -179,7 +179,7 @@ export const mockAppointments = [
     doctorName: "Dr. Elizabeth Taylor",
     date: "2023-09-24",
     time: "15:30",
-    status: "scheduled",
+    status: "scheduled" as "scheduled" | "completed" | "cancelled",
     purpose: "Heart check-up"
   }
 ];
@@ -191,7 +191,7 @@ export const mockBills = [
     patientName: "John Smith",
     date: "2023-09-10",
     amount: 350.00,
-    status: "paid",
+    status: "paid" as "paid" | "pending" | "overdue",
     items: [
       { service: "Consultation", cost: 150.00 },
       { service: "Blood Pressure Test", cost: 50.00 },
@@ -205,7 +205,7 @@ export const mockBills = [
     patientName: "Michael Chen",
     date: "2023-08-25",
     amount: 200.00,
-    status: "paid",
+    status: "paid" as "paid" | "pending" | "overdue",
     items: [
       { service: "Consultation", cost: 150.00 },
       { service: "Lung Function Test", cost: 50.00 }
@@ -217,7 +217,7 @@ export const mockBills = [
     patientName: "Sarah Johnson",
     date: "2023-09-20",
     amount: 475.00,
-    status: "pending",
+    status: "pending" as "paid" | "pending" | "overdue",
     items: [
       { service: "Consultation", cost: 150.00 },
       { service: "MRI Scan", cost: 325.00 }
@@ -229,7 +229,7 @@ export const mockBills = [
     patientName: "Emily Davis",
     date: "2023-09-21",
     amount: 525.00,
-    status: "pending",
+    status: "pending" as "paid" | "pending" | "overdue",
     items: [
       { service: "Consultation", cost: 150.00 },
       { service: "X-Ray", cost: 200.00 },
