@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { 
   Bell, 
   Search, 
   User,
-  ChevronDown
+  ChevronDown,
+  Settings
 } from "lucide-react";
 import { 
   DropdownMenu, 
