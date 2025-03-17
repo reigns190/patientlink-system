@@ -66,8 +66,8 @@ export interface Inventory {
   lastRestocked: string;
 }
 
-// API base URL - Updated to point to your Tomcat server
-const API_BASE_URL = "http://localhost:8080/hospital-api/api";
+// API base URL - Updated to point to your Tomcat server and actual API path
+const API_BASE_URL = "http://localhost:8080/Hospital/hospital-api/api";
 
 // Context type definition
 interface HospitalContextType {
@@ -117,6 +117,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
       try {
         // Fetch patients
         setLoading(prev => ({ ...prev, patients: true }));
+        console.log("Fetching patients from:", `${API_BASE_URL}/patients`);
         const patientsResponse = await fetch(`${API_BASE_URL}/patients`);
         if (!patientsResponse.ok) throw new Error('Failed to fetch patients');
         const patientsData = await patientsResponse.json();
@@ -125,6 +126,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Fetch doctors
         setLoading(prev => ({ ...prev, doctors: true }));
+        console.log("Fetching doctors from:", `${API_BASE_URL}/doctors`);
         const doctorsResponse = await fetch(`${API_BASE_URL}/doctors`);
         if (!doctorsResponse.ok) throw new Error('Failed to fetch doctors');
         const doctorsData = await doctorsResponse.json();
@@ -133,6 +135,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Fetch appointments
         setLoading(prev => ({ ...prev, appointments: true }));
+        console.log("Fetching appointments from:", `${API_BASE_URL}/appointments`);
         const appointmentsResponse = await fetch(`${API_BASE_URL}/appointments`);
         if (!appointmentsResponse.ok) throw new Error('Failed to fetch appointments');
         const appointmentsData = await appointmentsResponse.json();
@@ -141,6 +144,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Fetch bills
         setLoading(prev => ({ ...prev, bills: true }));
+        console.log("Fetching bills from:", `${API_BASE_URL}/bills`);
         const billsResponse = await fetch(`${API_BASE_URL}/bills`);
         if (!billsResponse.ok) throw new Error('Failed to fetch bills');
         const billsData = await billsResponse.json();
@@ -149,6 +153,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Fetch inventory
         setLoading(prev => ({ ...prev, inventory: true }));
+        console.log("Fetching inventory from:", `${API_BASE_URL}/inventory`);
         const inventoryResponse = await fetch(`${API_BASE_URL}/inventory`);
         if (!inventoryResponse.ok) throw new Error('Failed to fetch inventory');
         const inventoryData = await inventoryResponse.json();
@@ -161,6 +166,7 @@ export const HospitalProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // If API fails, use mock data (for development only)
         import('./mockData').then(({ mockPatients, mockDoctors, mockAppointments, mockBills, mockInventory }) => {
+          console.log("Using mock data due to API failure");
           setPatients(mockPatients);
           setDoctors(mockDoctors);
           setAppointments(mockAppointments);

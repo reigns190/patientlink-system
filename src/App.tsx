@@ -9,9 +9,17 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import Dashboard from "@/pages/Dashboard";
 import Patients from "@/pages/Patients";
 import Appointments from "@/pages/Appointments";
+import Index from "@/pages/Index";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      staleTime: 30000,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -21,8 +29,9 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<Index />} />
             <Route
-              path="/"
+              path="/dashboard"
               element={
                 <AppLayout>
                   <Dashboard />
