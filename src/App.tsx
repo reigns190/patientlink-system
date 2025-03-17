@@ -21,13 +21,17 @@ const queryClient = new QueryClient({
   },
 });
 
+// Define the base URL path for router
+const basePath = import.meta.env.BASE_URL;
+console.log("Router using base path:", basePath);
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <HospitalProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename={basePath}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route

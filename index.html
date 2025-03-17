@@ -8,6 +8,11 @@
     <meta name="description" content="A comprehensive hospital management system for efficient healthcare operations." />
     <meta name="author" content="MediCare" />
     <meta property="og:image" content="/og-image.png" />
+    <!-- The base href will be properly set during the build -->
+    <script>
+      // This ensures that the base href is set correctly regardless of deployment path
+      document.write('<base href="' + (window.location.pathname.split('/').slice(0, -1).join('/') || '/') + '/" />');
+    </script>
   </head>
 
   <body>

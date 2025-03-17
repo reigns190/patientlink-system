@@ -23,7 +23,7 @@ const Index = () => {
           <CardContent>
             <Button 
               className="w-full" 
-              onClick={() => navigate("/")}>
+              onClick={() => navigate("/dashboard")}>
               Go to Dashboard
             </Button>
           </CardContent>
